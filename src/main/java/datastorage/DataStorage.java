@@ -13,7 +13,7 @@ public interface DataStorage {
 
 //    public Map<String, List<Integer>> getFilters();
 
-    public DataBag createDataBag(List<Integer> filters, List<Integer> items, List<Integer> values) ;
+    public DataBag createDataBag(List<Integer> items, List<Integer> filters, List<Integer> values) ;
 
 
 }

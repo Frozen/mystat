@@ -1,5 +1,6 @@
 import datastorage.*;
 
+import java.sql.*;
 import java.util.Arrays;
 
 /**
@@ -11,36 +12,48 @@ public class Main {
 
     }
 
-    public static void main(String[] str) throws InterruptedException {
+    public static void main(String[] str) throws InterruptedException, ClassNotFoundException, SQLException {
 
         DataStorage ds = new SimpleDataStorage();
 
 //        DataModel dm = ds.getDataModel();
 
         DataBag dbag = ds.createDataBag(
-                Arrays.asList(10, 20, 30, 40, 50),
                 Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9),
+                Arrays.asList(10, 20, 30, 40, 50),
                 Arrays.asList(200, 201, 202, 203, 204, 205)
         );
 
-        dbag.setData(11, 1, Arrays.asList(1,2,3,4,5));
+        dbag.setData(9, 10, 205, 5);
 
         Result rs = dbag.calculate();
 
-        rs.getSum(1, 2, 3, 10);
+        int val = rs.getSum(9, 10, 200, 204);
 
-//        for (int i=0; i<50; i++) {
-//            System.out.println(dm.getSum(0, 50, 5, i));
-//        }
+        System.out.println(val);
 
 
 
+        Class.forName("com.mysql.jdbc.Driver");
 
-//        MyAlgorithm my = MyAlgorithm.fromDataStorage(new File("/home/kot/datastorage"));
-//        MyAlgorithm my = MyAlgorithm.fromDataStorage(new SimpleDataStorage());
+        Connection connect = DriverManager
+                .getConnection("jdbc:mysql://localhost/statistics?user=root&password=root");
 
-//        datastorage.Result rs = my.getSum(new Date(), new Date(), new ArrayList<>(), 100);
+        // statements allow to issue SQL queries to the database
+        Statement statement = connect.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+        statement.setFetchSize(Integer.MIN_VALUE);
+        // resultSet gets the result of the SQL query
+        ResultSet resultSet = statement
+                .executeQuery("select * from table");
 
+        while (resultSet.next()) {
+            // it is possible to get the columns via name
+            // also possible to get the columns via the column number
+            // which starts at 1
+            // e.g., resultSet.getSTring(2);
+            int user = resultSet.getInt("id");
+            System.out.println(user);
+        }
 
 
 

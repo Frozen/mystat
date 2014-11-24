@@ -35,7 +35,7 @@ public class SimpleDataStorage implements DataStorage {
     }
 
     @Override
-    public DataBag createDataBag(List<Integer> filters, List<Integer> items, List<Integer> values) {
+    public DataBag createDataBag(List<Integer> items, List<Integer> filters, List<Integer> values) {
 //        Calendar calendar = Calendar.getInstance();
 //        int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
         return new BaseDataBag(filters, items, values);
