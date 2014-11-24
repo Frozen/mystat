@@ -1,4 +1,5 @@
-import DataStorage.DataStorage;
+import datastorage.DataModel;
+import datastorage.DataStorage;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,14 +9,17 @@ import java.util.Date;
  */
 public class MyAlgorithm {
 
-    private DataStorage.DataModel model;
+    private DataModel model;
 
     private MyAlgorithm() {
     }
 
-    public Result getSum(Date date, Date date1, ArrayList<Object> objects, int i) {
+//    public datastorage.Result getSum(Date date, Date date1, ArrayList<Object> objects, int i) {
 
-    }
+
+
+
+//    }
 
 
     public static MyAlgorithm fromDataStorage(DataStorage storage) {

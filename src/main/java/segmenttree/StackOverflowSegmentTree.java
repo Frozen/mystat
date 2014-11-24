@@ -1,6 +1,6 @@
 package segmenttree;
 
-public class StackOverflowSegmentTree {
+class StackOverflowSegmentTree {
 
     public static class STNode {
         int leftIndex;
@@ -63,4 +63,6 @@ public class StackOverflowSegmentTree {
         root.sum += diff;
         return diff;
     }
+
+
 }

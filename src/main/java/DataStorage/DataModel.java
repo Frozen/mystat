@@ -1,4 +1,6 @@
-package DataStorage;
+package datastorage;
+
+import segmenttree.SegmentTree;
 
 /**
  * Created by kot on 21.11.14.

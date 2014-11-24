@@ -1,8 +1,6 @@
-import segmenttree.StackOverflowSegmentTree;
+import datastorage.*;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 
 /**
  * Created by kot on 07.11.14.
@@ -13,91 +11,42 @@ public class Main {
 
     }
 
-    public static void main(String[] str) throws IOException, InterruptedException {
+    public static void main(String[] str) throws InterruptedException {
 
-        int[] A = {1, 2, 3, 4, 5, 6, 7};
+        DataStorage ds = new SimpleDataStorage();
 
-        StackOverflowSegmentTree.STNode tree = StackOverflowSegmentTree.constructSegmentTree(A, 0, A.length - 1);
+//        DataModel dm = ds.getDataModel();
 
-        System.out.println(StackOverflowSegmentTree.getSum(tree, 1, 5));
+        DataBag dbag = ds.createDataBag(
+                Arrays.asList(10, 20, 30, 40, 50),
+                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9),
+                Arrays.asList(200, 201, 202, 203, 204, 205)
+        );
 
-//        DataInputStream a = new DataInputStream(new FileInputStream("asdfas"));
+        dbag.setData(11, 1, Arrays.asList(1,2,3,4,5));
 
-        MyAlgorithm my = MyAlgorithm.fromDataStorage(new File("/home/kot/datastorage"));
+        Result rs = dbag.calculate();
 
-        Result rs = my.getSum(new Date(), new Date(), new ArrayList<>(), 100);
+        rs.getSum(1, 2, 3, 10);
+
+//        for (int i=0; i<50; i++) {
+//            System.out.println(dm.getSum(0, 50, 5, i));
+//        }
+
+
+
+
+//        MyAlgorithm my = MyAlgorithm.fromDataStorage(new File("/home/kot/datastorage"));
+//        MyAlgorithm my = MyAlgorithm.fromDataStorage(new SimpleDataStorage());
+
+//        datastorage.Result rs = my.getSum(new Date(), new Date(), new ArrayList<>(), 100);
+
 
 
 
 
 
     }
-
-    private static long doReallyLongThing(int times) {
-
-        long y = 0;
-
-        for (int i=0; i< times; i++) {
-            y += i;
-        }
-        return y;
-
-    }
-
-
-    static class PrefixTree {
-
-        private Node root = null;
-
-        private class Node {
-
-            private char key;
-            private int value;
-
-            private Node nextSibling = null;
-            private Node child = null;
-
-            public Node(char key, int value) {
-                this.key = key;
-                this.value = value;
-            }
-        }
-
-
-        public void addString(String s) {
-
-            Node _parent = this.root;
-
-
-
-
-            if (this.root == null) {
-
-            }
-
-            for (int i=0; i < s.length(); i++ ) {
-
-                while (_parent != null || _parent.key != s.charAt(i)) {
-                    _parent = root.nextSibling;
-                }
-                if (_parent == null) {
-
-                }
-
-
-
-                System.out.println(s.charAt(i));
-            }
-        }
-
-
-    }
-
-
-
-
-
-
 
 }
 

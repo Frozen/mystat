@@ -1,3 +1,5 @@
+package segmenttree;
+
 /**
  * Created by kot on 21.11.14.
  */
