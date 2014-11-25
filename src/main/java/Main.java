@@ -37,7 +37,7 @@ public class Main {
         Class.forName("com.mysql.jdbc.Driver");
 
         Connection connect = DriverManager
-                .getConnection("jdbc:mysql://localhost/statistics?user=root&password=root");
+                .getConnection("jdbc:mysql://localhost/statistics?user=statistics&password=statistics");
 
         // statements allow to issue SQL queries to the database
         Statement statement = connect.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);

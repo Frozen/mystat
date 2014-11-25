@@ -9,7 +9,7 @@ import java.util.Map;
 public interface DataStorage {
 
 
-    public DataModel getDataModel();
+//    public DataModel getDataModel();
 
 //    public Map<String, List<Integer>> getFilters();
 

@@ -8,6 +8,7 @@ import java.util.*;
  * Created by kot on 21.11.14.
  */
 public class SimpleDataStorage implements DataStorage {
+    /*
     @Override
     public DataModel getDataModel() {
 
@@ -33,11 +34,10 @@ public class SimpleDataStorage implements DataStorage {
         return new DataModel(ret);
 
     }
+    */
 
     @Override
     public DataBag createDataBag(List<Integer> items, List<Integer> filters, List<Integer> values) {
-//        Calendar calendar = Calendar.getInstance();
-//        int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
         return new BaseDataBag(filters, items, values);
     }
 

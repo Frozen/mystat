@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class MyAlgorithm {
 
-    private DataModel model;
+//    private DataModel model;
 
     private MyAlgorithm() {
     }
@@ -25,7 +25,7 @@ public class MyAlgorithm {
     public static MyAlgorithm fromDataStorage(DataStorage storage) {
 
         MyAlgorithm self = new MyAlgorithm();
-        self.model = storage.getDataModel();
+//        self.model = storage.getDataModel();
 
         return self;
 
