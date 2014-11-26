@@ -1,7 +1,7 @@
 package datastorage;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by kot on 21.11.14.
@@ -15,5 +15,8 @@ public interface DataStorage {
 
     public DataBag createDataBag(List<Integer> items, List<Integer> filters, List<Integer> values) ;
 
+    public Result loadResult();
+
+    public void write(Result rs) throws IOException;
 
 }

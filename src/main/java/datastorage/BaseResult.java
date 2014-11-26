@@ -24,6 +24,7 @@ public class BaseResult implements Result {
     @Override
     public int getSum(int item, int filter, int from, int to) {
 
+        // TODO:
         int item_id = this.items.get(item);
         int filter_id = this.filters.get(filter);
         int from_id = this.values.get(from);
@@ -31,4 +32,26 @@ public class BaseResult implements Result {
 
         return this.s[item_id][filter_id].getSum(from_id, to_id);
     }
+
+    @Override
+    public Map<Integer, Integer> getItems() {
+        return this.items;
+    }
+
+    @Override
+    public Map<Integer, Integer> getFilters() {
+        return this.filters;
+    }
+
+    @Override
+    public Map<Integer, Integer> getValues() {
+        return this.values;
+    }
+
+    @Override
+    public SegmentTree[][] getData() {
+        return this.s;
+    }
+
+
 }

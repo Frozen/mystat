@@ -22,16 +22,24 @@ public class ArraySegmentTree implements SegmentTree{
         return getSum(1, 0, this.t.length/4 - 1, left, right);
     }
 
+    @Override
+    public int[] asArray() {
+        return this.t;
+    }
+
     private int getSum(int v, int tl, int tr, int l, int r) {
 
-        if (l > r)
+        if (l > r) {
+            System.out.println("l > r" + l + " " + r);
             return 0;
-        if (l == tl && r == tr)
+        }
+        if (l == tl && r == tr) {
+            System.out.println("l == tl && r == tr "  + l + " " + r);
             return this.t[v];
+        }
         int tm = (tl + tr) / 2;
         return getSum(v*2, tl, tm, l, Math.min(r, tm)) + getSum(v * 2 + 1, tm + 1, tr, Math.max(l, tm + 1), r);
     }
-
 
     public static ArraySegmentTree build(int [] arr) {
         int[] t = new int[arr.length*4];
@@ -52,8 +60,5 @@ public class ArraySegmentTree implements SegmentTree{
         build(t, a, v * 2 + 1, mid + 1, r);
         t[v] = t[v*2] + t[v*2+1];
     }
-
-
-
 
 }

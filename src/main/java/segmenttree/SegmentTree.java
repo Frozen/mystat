@@ -7,4 +7,5 @@ public interface SegmentTree {
 
     int getSum(int left, int right);
 
+    int[] asArray();
 }

@@ -1,7 +1,5 @@
 package datastorage;
-
-import segmenttree.SimpleSegmentTree;
-
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -39,6 +37,16 @@ public class SimpleDataStorage implements DataStorage {
     @Override
     public DataBag createDataBag(List<Integer> items, List<Integer> filters, List<Integer> values) {
         return new BaseDataBag(filters, items, values);
+    }
+
+    @Override
+    public Result loadResult() {
+        return null;
+    }
+
+    @Override
+    public void write(Result rs) throws IOException {
+        throw new IllegalArgumentException();
     }
 
 //    @Override

@@ -1,7 +1,7 @@
 package datastorage;
 
-import segmenttree.SimpleSegmentTree;
-
+import segmenttree.ArraySegmentTree;
+import segmenttree.SegmentTree;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,11 +93,11 @@ public class BaseDataBag implements DataBag {
 
     @Override
     public Result calculate() {
-        SimpleSegmentTree[][] ret = new SimpleSegmentTree[this.items.size()][this.filters.size()];
+        SegmentTree[][] ret = new ArraySegmentTree[this.items.size()][this.filters.size()];
 
         for (int x =0; x < this.items.size(); x++) {
             for(int y=0; y<this.filters.size(); y++) {
-                ret[x][y] = new SimpleSegmentTree(this.ret[x][y]);
+                ret[x][y] = ArraySegmentTree.build(this.ret[x][y]);
             }
         }
         return new BaseResult(ret, this.items, this.filters, this.values);
