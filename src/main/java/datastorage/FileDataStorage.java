@@ -3,6 +3,7 @@ package datastorage;
 import segmenttree.SegmentTree;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,14 +27,52 @@ public class FileDataStorage implements DataStorage {
     }
 
     @Override
-    public Result loadResult() {
+    public Result loadResult() throws IOException {
+
+//        DataOutputStream out_items = new DataOutputStream(new FileOutputStream(new File(this.directory, this.filterName + ".items.bin")));
+        File items_file = new File(this.directory, this.filterName + ".items.bin");
+        Map<Integer, Integer> items = this.loadData(items_file);
+
+        File filters_file = new File(this.directory, this.filterName + ".filters.bin");
+        Map<Integer, Integer> filters = this.loadData(items_file);
+
+        File values_file = new File(this.directory, this.filterName + ".values.bin");
+        Map<Integer, Integer> values = this.loadData(items_file);
+
+
+        return new FileResult()
+
+
+
+
         return null;
+    }
+
+    private Map<Integer, Integer> loadData(File f) throws IOException {
+        DataInputStream in_items = new DataInputStream(new FileInputStream(f));
+        int i = 0;
+
+        Map<Integer, Integer> items = new HashMap<Integer, Integer>((int)f.length()/4);
+
+        try {
+            while (true) {
+                int readed = in_items.readInt();
+                System.out.println(readed);
+                items.put(readed, i++);
+            }
+
+        } catch (EOFException ignored) {
+            System.out.println("[EOF]");
+        }
+        in_items.close();
+
+        return items;
     }
 
     public void write(Result rs) throws IOException {
         DataOutputStream out_items = new DataOutputStream(new FileOutputStream(new File(this.directory, this.filterName + ".items.bin")));
-        DataOutputStream out_filters = new DataOutputStream(new FileOutputStream(new File(this.directory, this.filterName + ".filters")));
-        DataOutputStream out_values = new DataOutputStream(new FileOutputStream(new File(this.directory, this.filterName + ".values")));
+        DataOutputStream out_filters = new DataOutputStream(new FileOutputStream(new File(this.directory, this.filterName + ".filters.bin")));
+        DataOutputStream out_values = new DataOutputStream(new FileOutputStream(new File(this.directory, this.filterName + ".values.bin")));
 
         this.write(rs.getItems(), out_items);
         this.write(rs.getFilters(), out_filters);
@@ -59,7 +98,7 @@ public class FileDataStorage implements DataStorage {
         for (int x= 0; x< segment_length; x++ ) {
             for(int clip=0; clip<clip_length; clip++) {
                 for(int filter=0; filter<filter_length; filter++) {
-                    out_items.write(data[clip][filter].asArray()[x]);
+                    out_items.writeInt(data[clip][filter].asArray()[x]);
                 }
             }
         }
@@ -84,7 +123,7 @@ public class FileDataStorage implements DataStorage {
 
         for (int x: save_items) {
             System.out.println(x);
-            dos.write(x);
+            dos.writeInt(x);
         }
     }
 

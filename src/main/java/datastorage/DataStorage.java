@@ -1,5 +1,6 @@
 package datastorage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface DataStorage {
 
     public DataBag createDataBag(List<Integer> items, List<Integer> filters, List<Integer> values) ;
 
-    public Result loadResult();
+    public Result loadResult() throws IOException;
 
     public void write(Result rs) throws IOException;
 

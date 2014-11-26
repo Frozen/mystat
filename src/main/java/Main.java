@@ -16,13 +16,15 @@ public class Main {
 
     public static void main(String[] str) throws IOException {
 
+        System.out.println(System.getProperty("user.home"));
+
 //        create();
 //        create_test();
-
+        read();
     }
 
     private static void create_test() throws IOException {
-        DataStorage ds = new FileDataStorage(new File("/Users/kot/datastorage"), "regions");
+        DataStorage ds = new FileDataStorage(new File(System.getProperty("user.home"), "datastorage"), "regions");
 
 //        DataModel dm = ds.getDataModel();
 
@@ -89,13 +91,13 @@ public class Main {
         }
     }
 
-    private static void read() {
+    private static void read() throws IOException {
 
-        DataStorage ds = new FileDataStorage(new File("/Users/kot/datastorage"), "regions");
+        DataStorage ds = new FileDataStorage(new File(System.getProperty("user.home"), "datastorage"), "regions");
 
         Result rs = ds.loadResult();
 
-        System.out.println(rs.getSum(1, 10, 200, 204));
+//        System.out.println(rs.getSum(1, 10, 200, 204));
 
     }
 
