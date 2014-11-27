@@ -12,6 +12,8 @@ import java.util.Map;
  */
 public class FileDataStorage implements DataStorage {
 
+    public final String FILE_NAME_DATA = ".dat";
+
 
     private final File directory;
     private final String filterName;
@@ -34,18 +36,14 @@ public class FileDataStorage implements DataStorage {
         Map<Integer, Integer> items = this.loadData(items_file);
 
         File filters_file = new File(this.directory, this.filterName + ".filters.bin");
-        Map<Integer, Integer> filters = this.loadData(items_file);
+        Map<Integer, Integer> filters = this.loadData(filters_file);
 
         File values_file = new File(this.directory, this.filterName + ".values.bin");
-        Map<Integer, Integer> values = this.loadData(items_file);
+        Map<Integer, Integer> values = this.loadData(values_file);
 
+        File data = new File(this.directory, this.filterName + this.FILE_NAME_DATA);
+        return new FileResult(items, filters, values, data);
 
-        return new FileResult()
-
-
-
-
-        return null;
     }
 
     private Map<Integer, Integer> loadData(File f) throws IOException {

@@ -38,7 +38,7 @@ public class Main {
 
         dbag.setData(1, 10, 200, 5);
         dbag.setData(1, 10, 201, 2);
-//        dbag.setData(1, 10, 200, 4);
+        dbag.setData(2, 10, 200, 4);
 
         Result rs = dbag.calculate();
 
@@ -49,7 +49,7 @@ public class Main {
         ds.write(rs);
     }
 
-    private static void create() throws ClassNotFoundException, SQLException {
+    private static void create() throws ClassNotFoundException, SQLException, IOException {
         DataStorage ds = new SimpleDataStorage();
 
 //        DataModel dm = ds.getDataModel();
@@ -97,7 +97,10 @@ public class Main {
 
         Result rs = ds.loadResult();
 
-//        System.out.println(rs.getSum(1, 10, 200, 204));
+//        System.out.print();
+        System.out.println("rs == " + rs.getSum(1, 10, 200, 204));
+        System.out.println("rs == " + rs.getSum(1, 10, 201, 204));
+//        System.out.println("rs == " + rs.getSum(1, 10, 200, 204));
 
     }
 

@@ -2,6 +2,7 @@ package datastorage;
 
 import segmenttree.SegmentTree;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -22,7 +23,7 @@ public class BaseResult implements Result {
     }
 
     @Override
-    public int getSum(int item, int filter, int from, int to) {
+    public int getSum(int item, int filter, int from, int to) throws IOException {
 
         // TODO:
         int item_id = this.items.get(item);
