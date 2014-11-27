@@ -3,8 +3,7 @@ package datastorage;
 import segmenttree.SegmentTree;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by kot on 26.11.14.
@@ -32,20 +31,38 @@ public class FileResult implements Result {
         int from_id = this.values.get(from);
         int to_id = this.values.get(to);
 
-        Map<Integer, Integer> items = new HashMap<Integer, Integer>((int)this.dataFile.length()/4);
+        ArrayList<Integer> _positions = new ArrayList<Integer>();
+        this.searchPositions(_positions, from_id, to_id);
+        Collections.sort(_positions);
 
-        in_items.skipBytes(4*this.items.size()*this.filters.size());
-//        in_items.skipBytes(4*this.items.size()*this.filters.size());
+//        System.out.println("positions = " + _positions);
 
-        int[] array = new int[this.items.size()*this.filters.size()];
+        int row_length_bytes = 4*this.items.size()*this.filters.size();
+        int row_length_ints = this.items.size()*this.filters.size();
 
-        try {
+        int[] array = new int[row_length_ints];
 
-            for (int i=0; i<this.items.size()*this.filters.size(); i++) {
+        int current_position = 0;
+
+        for (int position: _positions) {
+            assert position > 0;
+
+//            System.out.println("skip " + ((position - current_position)*row_length_bytes));
+
+            in_items.skipBytes( (position - current_position)*row_length_bytes );
+            current_position = position;
+
+            for (int i=0; i<row_length_ints; i++) {
                 int readed = in_items.readInt();
-                System.out.println(readed);
-                array[i] = readed;
+//                System.out.println("readed " + readed);
+                array[i] += readed;
             }
+            current_position++;
+
+        }
+
+
+
 
 //            int i = this.items.size()*this.filters.size();
 //            while (i>0) {
@@ -56,12 +73,32 @@ public class FileResult implements Result {
 
 //            }
 
-        } catch (EOFException ignored) {
-            System.out.println("[EOF]");
-        }
+//        } catch (EOFException ignored) {
+//            System.out.println("[EOF]");
+//        }
         in_items.close();
 
         return array[item_id*filter_id];
+    }
+
+    private int searchPositions(List<Integer> rs, int v, int tl, int tr, int l, int r) {
+
+        if (l > r) {
+//            System.out.println("l > r" + l + " " + r);
+            return 0;
+        }
+        if (l == tl && r == tr) {
+//            System.out.println("l == tl && r == tr "  + l + " " + r);
+            rs.add(v);
+//            return this.t[v];
+            return 0;
+        }
+        int tm = (tl + tr) / 2;
+        return searchPositions(rs, v * 2, tl, tm, l, Math.min(r, tm)) + searchPositions(rs, v * 2 + 1, tm + 1, tr, Math.max(l, tm + 1), r);
+    }
+
+    private int searchPositions(List<Integer> rs, int left, int right) {
+        return searchPositions(rs, 1, 0, this.values.size()-1, left, right);
     }
 
     @Override

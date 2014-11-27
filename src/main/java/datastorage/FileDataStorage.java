@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Arrays;
 
 /**
  * Created by kot on 25.11.14.
@@ -55,12 +56,12 @@ public class FileDataStorage implements DataStorage {
         try {
             while (true) {
                 int readed = in_items.readInt();
-                System.out.println(readed);
+//                System.out.println(readed);
                 items.put(readed, i++);
             }
 
         } catch (EOFException ignored) {
-            System.out.println("[EOF]");
+//            System.out.println("[EOF]");
         }
         in_items.close();
 
@@ -96,6 +97,7 @@ public class FileDataStorage implements DataStorage {
         for (int x= 0; x< segment_length; x++ ) {
             for(int clip=0; clip<clip_length; clip++) {
                 for(int filter=0; filter<filter_length; filter++) {
+//                    System.out.println("bin tree " + Arrays.toString(data[clip][filter].asArray()));
                     out_items.writeInt(data[clip][filter].asArray()[x]);
                 }
             }

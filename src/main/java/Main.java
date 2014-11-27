@@ -18,7 +18,6 @@ public class Main {
 
         System.out.println(System.getProperty("user.home"));
 
-//        create();
 //        create_test();
         read();
     }
@@ -29,16 +28,17 @@ public class Main {
 //        DataModel dm = ds.getDataModel();
 
         DataBag dbag = ds.createDataBag(
-                Arrays.asList(1, 2),
-//                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9),
-                Arrays.asList(10, 11),
-//                Arrays.asList(10, 20, 30, 40, 50),
+                Arrays.asList(1),
+                Arrays.asList(10),
                 Arrays.asList(200, 201, 202, 203, 204)
         );
 
-        dbag.setData(1, 10, 200, 5);
+        dbag.setData(1, 10, 200, 1);
         dbag.setData(1, 10, 201, 2);
-        dbag.setData(2, 10, 200, 4);
+        dbag.setData(1, 10, 202, 3);
+        dbag.setData(1, 10, 203, 4);
+        dbag.setData(1, 10, 204, 5);
+//        dbag.setData(2, 10, 200, 4);
 
         Result rs = dbag.calculate();
 
@@ -49,6 +49,8 @@ public class Main {
         ds.write(rs);
     }
 
+
+    /*
     private static void create() throws ClassNotFoundException, SQLException, IOException {
         DataStorage ds = new SimpleDataStorage();
 
@@ -91,6 +93,8 @@ public class Main {
         }
     }
 
+    */
+
     private static void read() throws IOException {
 
         DataStorage ds = new FileDataStorage(new File(System.getProperty("user.home"), "datastorage"), "regions");
@@ -98,8 +102,13 @@ public class Main {
         Result rs = ds.loadResult();
 
 //        System.out.print();
-        System.out.println("rs == " + rs.getSum(1, 10, 200, 204));
+//        System.out.println("rs == " + rs.getSum(1, 10, 200, 204));
+        // [0, 15, 6, 9, 3, 3, 4, 5, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        long startTime = System.currentTimeMillis();
         System.out.println("rs == " + rs.getSum(1, 10, 201, 204));
+        System.out.println("rs == " + rs.getSum(1, 10, 202, 204));
+        long endTime = System.currentTimeMillis();
+        System.out.println("That took " + (endTime - startTime) + " milliseconds");
 //        System.out.println("rs == " + rs.getSum(1, 10, 200, 204));
 
     }
