@@ -3,6 +3,7 @@ package datastorage;
 import segmenttree.SegmentTree;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,6 +53,11 @@ public class BaseResult implements Result {
     @Override
     public SegmentTree[][] getData() {
         return this.s;
+    }
+
+    @Override
+    public List<Integer> getSum(List<Integer> filters, int from, int to) throws IOException {
+        return null;
     }
 
 

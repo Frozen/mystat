@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Arrays;
 
 /**
  * Created by kot on 25.11.14.
@@ -32,7 +31,6 @@ public class FileDataStorage implements DataStorage {
     @Override
     public Result loadResult() throws IOException {
 
-//        DataOutputStream out_items = new DataOutputStream(new FileOutputStream(new File(this.directory, this.filterName + ".items.bin")));
         File items_file = new File(this.directory, this.filterName + ".items.bin");
         Map<Integer, Integer> items = this.loadData(items_file);
 
@@ -44,7 +42,6 @@ public class FileDataStorage implements DataStorage {
 
         File data = new File(this.directory, this.filterName + this.FILE_NAME_DATA);
         return new FileResult(items, filters, values, data);
-
     }
 
     private Map<Integer, Integer> loadData(File f) throws IOException {
@@ -56,12 +53,10 @@ public class FileDataStorage implements DataStorage {
         try {
             while (true) {
                 int readed = in_items.readInt();
-//                System.out.println(readed);
                 items.put(readed, i++);
             }
 
         } catch (EOFException ignored) {
-//            System.out.println("[EOF]");
         }
         in_items.close();
 
@@ -105,10 +100,8 @@ public class FileDataStorage implements DataStorage {
 
         out_items.close();
 
-
-
 //    clip_1      clip_2
-//    f1  f2  f2  f1  f2  f3
+//    f1  f2  f3  f1  f2  f3
 //    | | | | | | | | | | | | |
 //
 
@@ -122,10 +115,8 @@ public class FileDataStorage implements DataStorage {
         }
 
         for (int x: save_items) {
-            System.out.println(x);
             dos.writeInt(x);
         }
     }
-
 
 }

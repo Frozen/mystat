@@ -11,13 +11,13 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 import org.apache.commons.io.FileUtils;
 
-public class FileDataStorageTest {
+public class FileDataStorageBaseTest {
 
     private File dataDir;
 
     @Before
     public void before() throws IOException {
-        URL location = FileDataStorageTest.class.getProtectionDomain().getCodeSource().getLocation();
+        URL location = FileDataStorageBaseTest.class.getProtectionDomain().getCodeSource().getLocation();
         this.dataDir = new File(new File(location.getFile()).getParentFile().getParentFile(), "test_data");
         FileUtils.cleanDirectory(dataDir);
     }
@@ -48,7 +48,6 @@ public class FileDataStorageTest {
         assertEquals(14, rs.getSum(1, 10, 201, 204));
         assertEquals(9, rs.getSum(1, 10, 201, 203));
     }
-
 
     @Test
     public void testLoadResult2() throws Exception {
@@ -102,7 +101,7 @@ public class FileDataStorageTest {
         Result rs = ds.loadResult();
 
         assertEquals(40, rs.getSum(1, 11, 200, 204));
-        assertEquals(36, rs.getSum(1, 11, 201, 204));
-        assertEquals(26, rs.getSum(1, 11, 201, 203));
+        assertEquals(34, rs.getSum(1, 11, 201, 204));
+        assertEquals(24, rs.getSum(1, 11, 201, 203));
     }
 }

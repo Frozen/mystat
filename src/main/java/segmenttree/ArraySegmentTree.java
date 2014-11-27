@@ -30,11 +30,11 @@ public class ArraySegmentTree implements SegmentTree{
     private int getSum(int v, int tl, int tr, int l, int r) {
 
         if (l > r) {
-            System.out.println("l > r" + l + " " + r);
+//            System.out.println("l > r" + l + " " + r);
             return 0;
         }
         if (l == tl && r == tr) {
-            System.out.println("l == tl && r == tr "  + l + " " + r);
+//            System.out.println("l == tl && r == tr "  + l + " " + r);
             return this.t[v];
         }
         int tm = (tl + tr) / 2;

@@ -19,4 +19,6 @@ public interface Result {
     public Map<Integer, Integer> getValues();
 
     public SegmentTree[][] getData();
+
+    List<Integer> getSum(List<Integer> filters, int from, int to) throws IOException;
 }
